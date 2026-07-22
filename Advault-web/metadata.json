@@ -1,0 +1,6 @@
+{
+  "name": "AdVault",
+  "description": "Offline Marketing Intelligence — A searchable knowledge platform where marketers can discover, research, compare, and learn from real-world offline marketing campaigns.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

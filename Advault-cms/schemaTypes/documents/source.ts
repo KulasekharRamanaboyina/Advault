@@ -93,9 +93,9 @@ export const sourceType = defineType({
             description: 'The date when this source was retrieved for research',
             type: 'date',
             validation: Rule => Rule.custom((accessedDate, context) => {
-                const publishedDate = (context.parent as any)?.publishedDate
+                const publishedDate = (context?.parent as any)?.publishedDate
                 if (publishedDate && accessedDate && new Date(accessedDate) < new Date(publishedDate)) {
-                    return 'Accessed date cannot be earlier than the published date'
+                     return 'Accessed date cannot be earlier than the published date'
                 }
                 return true
             }),

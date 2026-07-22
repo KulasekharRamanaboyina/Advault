@@ -175,7 +175,7 @@ export const campaignType = defineType({
             type: 'date',
             fieldset: 'basic',
             validation: Rule => Rule.custom((endDate, context) => {
-                const startDate = (context.parent as any)?.campaignStartDate
+                const startDate = (context?.parent as any)?.campaignStartDate
                 if (startDate && endDate && new Date(endDate) < new Date(startDate)) {
                     return 'Campaign end date must be after or equal to the start date'
                 }

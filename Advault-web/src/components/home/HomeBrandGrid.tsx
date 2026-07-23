@@ -4,7 +4,7 @@ import { BrandCard } from '../common/BrandCard';
 
 export const HomeBrandGrid: React.FC = () => {
   const { brands: BRANDS } = useAdVaultData();
-  const brandList = Object.values(BRANDS);
+  const brandList = Object.values(BRANDS).slice(0, 4);
 
   return (
     <section className="section">
@@ -13,7 +13,7 @@ export const HomeBrandGrid: React.FC = () => {
           <div>
             <h2 className="display-md" id="documented-brands-title">Documented Brands</h2>
           </div>
-          <a href="#discover" className="btn btn--sm btn--ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+          <a href="/brands" className="btn btn--sm btn--ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
             <span>More &rarr;</span>
           </a>
         </div>

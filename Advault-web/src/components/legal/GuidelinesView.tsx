@@ -5,7 +5,7 @@ export const GuidelinesView: React.FC = () => {
   return (
     <div className="container fade-in is-visible" style={{ maxWidth: '960px', padding: 'var(--space-8) var(--space-4)', margin: '0 auto' }}>
       <div style={{ marginBottom: 'var(--space-6)' }}>
-        <a href="#home" className="btn btn--sm btn--ghost" style={{ paddingLeft: 0, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+        <a href="/" className="btn btn--sm btn--ghost" style={{ paddingLeft: 0, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
           <ArrowLeft size={14} />
           <span>Back to Home</span>
         </a>

@@ -46,7 +46,7 @@ export const CampaignHeader: React.FC<CampaignHeaderProps> = ({
             <span className="brand-card__mark" style={{ width: '24px', height: '24px', backgroundColor: '#ffffff', borderRadius: '4px', border: '1px solid var(--border-subtle)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '2px' }}>
               <BrandLogo brandId={campaign.brand} customStyle={{ maxWidth: '90%', maxHeight: '90%' }} />
             </span>
-            <a href={`#brand/${campaign.brandSlug || campaign.brand.toLowerCase().replace(/[^a-z0-9]/g, '')}`} style={{ borderBottom: '1px solid var(--border-subtle)', fontWeight: 500 }}>{campaign.brand}</a>
+            <a href={`/brand/${campaign.brandSlug || campaign.brand.toLowerCase().replace(/[^a-z0-9]/g, '')}`} style={{ borderBottom: '1px solid var(--border-subtle)', fontWeight: 500 }}>{campaign.brand}</a>
           </div>
         </div>
         <div className="article-header__meta-item">
@@ -75,6 +75,19 @@ export const CampaignHeader: React.FC<CampaignHeaderProps> = ({
           <Share2 size={14} />
           <span>Copy Reference Link</span>
         </button>
+        {campaign.documents && campaign.documents.map((doc, idx) => (
+          <a 
+            key={idx}
+            href={doc.url} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="btn btn--sm btn--secondary" 
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+          >
+            <Download size={14} />
+            <span>View {doc.filename || 'Research Paper'}</span>
+          </a>
+        ))}
       </div>
     </header>
   );

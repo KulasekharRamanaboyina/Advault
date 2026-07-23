@@ -49,6 +49,7 @@ const logoMapping: Record<string, string> = {
   vw: 'VolksWagen.svg',
   absolut: 'absolut.svg',
   redbull: 'redbull.svg',
+  apollopharmacy: 'apollo.png',
 };
 
 async function uploadLogos() {

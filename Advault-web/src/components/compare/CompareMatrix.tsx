@@ -62,7 +62,9 @@ export const CompareMatrix: React.FC<CompareMatrixProps> = ({ selectedCampaigns,
       <div className="compare-table__row" style={gridStyle}>
         <div className="compare-table__cell compare-table__cell--label">Objective</div>
         {selectedCampaigns.map((camp, idx) => (
-          <div key={idx} className="compare-table__cell">{camp.objectiveContent.goals}</div>
+          <div key={idx} className="compare-table__cell">
+            {camp.objectiveContent.goals || camp.objectiveContent.problem || camp.overview}
+          </div>
         ))}
       </div>
 
@@ -111,7 +113,9 @@ export const CompareMatrix: React.FC<CompareMatrixProps> = ({ selectedCampaigns,
       <div className="compare-table__row" style={gridStyle}>
         <div className="compare-table__cell compare-table__cell--label">Key Learning</div>
         {selectedCampaigns.map((camp, idx) => (
-          <div key={idx} className="compare-table__cell">{camp.takeaways.learnings[0]}</div>
+          <div key={idx} className="compare-table__cell">
+            {camp.takeaways.learnings[0] || camp.takeaways.recommendations || 'N/A'}
+          </div>
         ))}
       </div>
     </div>

@@ -73,7 +73,19 @@ export interface Campaign {
   media: CampaignMediaContent;
   results: CampaignResultsContent;
   takeaways: CampaignTakeawaysContent;
-  references: string[];
+  references: (string | {
+    title: string;
+    url?: string;
+    fileUrl?: string;
+    fileName?: string;
+    sourceName?: string;
+    sourceType?: string;
+    author?: string;
+    publisher?: string;
+    publishedDate?: string;
+    accessedDate?: string;
+    notes?: any;
+  })[];
   related: string[];
 
   // Optional CMS integrations
@@ -81,7 +93,7 @@ export interface Campaign {
   featuredImage?: any;
   gallery?: any[];
   videos?: string[];
-  documents?: any[];
+  documents?: { url: string; filename: string; size?: number }[];
   campaignSummaryRaw?: any;
   campaignBackgroundRaw?: any;
   campaignPurposeRaw?: any;

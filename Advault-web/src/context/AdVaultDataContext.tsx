@@ -110,12 +110,23 @@ export const AdVaultDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
             featuredImage,
             gallery,
             videos,
-            documents,
+            documents[] {
+              "url": asset->url,
+              "filename": asset->originalFilename,
+              "size": asset->size
+            },
             sources[]-> {
               title,
               url,
+              "fileUrl": file.asset->url,
+              "fileName": file.asset->originalFilename,
               sourceName,
-              sourceType
+              sourceType,
+              author,
+              publisher,
+              publishedDate,
+              accessedDate,
+              notes
             },
             relatedCampaigns[]-> {
               "slug": slug.current
@@ -189,7 +200,15 @@ export const AdVaultDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
             desc: t.description
           })) || [];
 
-          const learningList = c.keyLearnings ? c.keyLearnings.map((l: any) => blocksToText(l)) : [];
+          const learningList = c.keyLearnings 
+            ? c.keyLearnings.map((block: any) => {
+                if (typeof block === 'string') return block;
+                if (block.children) {
+                  return block.children.map((child: any) => child.text).join('');
+                }
+                return '';
+              }).filter(Boolean)
+            : [];
           const practiceList = c.keyPerformanceIndicators || [];
 
           // Translate to existing frontend interface
@@ -214,9 +233,9 @@ export const AdVaultDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
             // Legacy plaintext fields for rendering fallbacks & read time calculation
             overview: blocksToText(c.campaignSummary),
             objectiveContent: {
-              goals: blocksToText(c.campaignPurpose || c.marketingObjective),
-              problem: blocksToText(c.businessProblem),
-              audience: blocksToText(c.targetAudience)
+              goals: blocksToText(c.campaignPurpose).trim() || blocksToText(c.marketingObjective).trim(),
+              problem: blocksToText(c.businessProblem).trim(),
+              audience: blocksToText(c.targetAudience).trim()
             },
             strategy: {
               approach: blocksToText(c.marketingStrategy),
@@ -245,14 +264,26 @@ export const AdVaultDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
               practices: practiceList,
               recommendations: blocksToText(c.keyLearnings)
             },
-            references: c.sources?.map((s: any) => `${s.title} (${s.sourceName})`) || [],
+            references: c.sources?.map((s: any) => ({
+              title: s.title || '',
+              url: s.url || '',
+              fileUrl: s.fileUrl || '',
+              fileName: s.fileName || '',
+              sourceName: s.sourceName || '',
+              sourceType: s.sourceType || '',
+              author: s.author || '',
+              publisher: s.publisher || '',
+              publishedDate: s.publishedDate || '',
+              accessedDate: s.accessedDate || '',
+              notes: s.notes || null
+            })) || [],
             related: c.relatedCampaigns?.map((rc: any) => rc.slug) || [],
 
             // Store raw Sanity structures for Portable Text rendering and rich layout support
             featuredImage: c.featuredImage,
             gallery: c.gallery,
             videos: c.videos,
-            documents: c.documents,
+            documents: c.documents || [],
 
             // Raw Portable Text arrays
             campaignSummaryRaw: c.campaignSummary,

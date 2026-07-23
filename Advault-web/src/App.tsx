@@ -10,11 +10,12 @@ import { CompareView } from './components/compare/CompareView';
 import { GuidelinesView } from './components/legal/GuidelinesView';
 import { PrivacyView } from './components/legal/PrivacyView';
 import { useAdVaultData } from './context/AdVaultDataContext';
+import { BrandsView } from './components/brand/BrandsView';
 
 export const App: React.FC = () => {
   const { campaigns: CAMPAIGNS, loading } = useAdVaultData();
-  // Hash Routing State
-  const [hash, setHash] = useState(window.location.hash || '#home');
+  // Pathname Routing State
+  const [pathname, setPathname] = useState(window.location.pathname || '/');
   const [currentView, setCurrentView] = useState('home');
   const [parameter, setParameter] = useState('');
 
@@ -65,13 +66,32 @@ export const App: React.FC = () => {
     }
   }, [toast.show]);
 
-  // Listen for hashchange events
+  // Listen for popstate events
   useEffect(() => {
-    const handleHashChange = () => {
-      setHash(window.location.hash || '#home');
+    const handlePopState = () => {
+      setPathname(window.location.pathname || '/');
     };
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Intercept all internal anchor clicks for SPA browser routing
+  useEffect(() => {
+    const handleGlobalClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a');
+      if (anchor) {
+        const href = anchor.getAttribute('href');
+        // Intercept links starting with / and not external links
+        if (href && href.startsWith('/') && !href.startsWith('//') && !anchor.target) {
+          e.preventDefault();
+          window.history.pushState({}, '', href);
+          window.dispatchEvent(new PopStateEvent('popstate'));
+        }
+      }
+    };
+    document.addEventListener('click', handleGlobalClick);
+    return () => document.removeEventListener('click', handleGlobalClick);
   }, []);
 
   // Parse routing parameters
@@ -79,19 +99,21 @@ export const App: React.FC = () => {
     let view = 'home';
     let param = '';
 
-    if (hash.startsWith('#campaign/')) {
+    if (pathname.startsWith('/campaign/')) {
       view = 'campaign';
-      param = hash.substring(10);
-    } else if (hash.startsWith('#brand/')) {
+      param = pathname.substring(10);
+    } else if (pathname.startsWith('/brand/')) {
       view = 'brand';
-      param = hash.substring(7);
-    } else if (hash === '#discover') {
+      param = pathname.substring(7);
+    } else if (pathname === '/discover') {
       view = 'discover';
-    } else if (hash === '#compare') {
+    } else if (pathname === '/brands') {
+      view = 'brands';
+    } else if (pathname === '/compare') {
       view = 'compare';
-    } else if (hash === '#guidelines') {
+    } else if (pathname === '/guidelines') {
       view = 'guidelines';
-    } else if (hash === '#privacy') {
+    } else if (pathname === '/privacy') {
       view = 'privacy';
     }
 
@@ -100,7 +122,7 @@ export const App: React.FC = () => {
 
     // Scroll to top on navigation so entrance animation looks clean
     window.scrollTo({ top: 0, behavior: 'instant' as any });
-  }, [hash]);
+  }, [pathname]);
 
   // Save campaign helper
   const handleSaveCampaign = (id: string, e: React.MouseEvent) => {
@@ -119,7 +141,7 @@ export const App: React.FC = () => {
   // Copy reference link helper
   const handleShareCampaign = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    const shareUrl = `${window.location.origin}${window.location.pathname}#campaign/${id}`;
+    const shareUrl = `${window.location.origin}/campaign/${id}`;
     navigator.clipboard.writeText(shareUrl)
       .then(() => showToast('Shareable article link copied to clipboard.'))
       .catch(() => showToast('Failed to copy link. Please copy the URL bar.'));
@@ -134,7 +156,8 @@ export const App: React.FC = () => {
   // Hero search trigger (navigates to discover with prepopulated query)
   const handleHeroSearchSubmit = (query: string) => {
     setFilters(prev => ({ ...prev, search: query }));
-    window.location.hash = '#discover';
+    window.history.pushState({}, '', '/discover');
+    window.dispatchEvent(new PopStateEvent('popstate'));
   };
 
   // Keyboard shortcuts and global navigation handlers
@@ -241,6 +264,8 @@ export const App: React.FC = () => {
             savedCampaigns={savedCampaigns}
           />
         );
+      case 'brands':
+        return <BrandsView />;
       case 'brand':
         return (
           <BrandDetailView 

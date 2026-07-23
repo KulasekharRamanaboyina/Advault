@@ -10,7 +10,7 @@ export const HomeCta: React.FC = () => {
         <p className="body-lg" style={{ maxWidth: '60ch', marginLeft: 'auto', marginRight: 'auto', marginBottom: 'var(--space-6)' }}>
           Navigate through hundreds of deep-dives covering consumer psychology, media strategy, local activations, and direct mail campaigns.
         </p>
-        <a href="#discover" className="btn btn--primary btn--lg" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+        <a href="/discover" className="btn btn--primary btn--lg" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
           <span>Explore Archive</span>
           <ArrowRight size={16} />
         </a>

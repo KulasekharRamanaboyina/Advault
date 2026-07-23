@@ -72,7 +72,7 @@ export const BrandDetailView: React.FC<BrandDetailViewProps> = ({
         
         {/* Back Link */}
         <div style={{ paddingTop: 'var(--space-6)', paddingBottom: 'var(--space-4)' }}>
-          <a href="#discover" className="btn btn--sm btn--ghost" style={{ paddingLeft: 0, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+          <a href="/discover" className="btn btn--sm btn--ghost" style={{ paddingLeft: 0, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
             <ArrowLeft size={14} />
             <span>Back to Discover</span>
           </a>

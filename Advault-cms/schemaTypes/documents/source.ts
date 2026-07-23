@@ -67,6 +67,16 @@ export const sourceType = defineType({
         }),
 
         defineField({
+            name: 'file',
+            title: 'File Attachment',
+            description: 'Upload the PDF/Document of the entire case study or research paper',
+            type: 'file',
+            options: {
+                accept: '.pdf,.doc,.docx,.txt',
+            },
+        }),
+
+        defineField({
             name: 'author',
             title: 'Author',
             description: 'The creator or writer of the source',

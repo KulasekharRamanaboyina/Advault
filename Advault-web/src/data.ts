@@ -4133,6 +4133,244 @@ export const CAMPAIGNS: Record<string, Campaign> = {
       "absolut",
       "absolut-warhol"
     ]
+  },
+  "apollo-trust": {
+    "id": "apollo-trust",
+    "brand": "Apollo Pharmacy",
+    "industry": "Healthcare",
+    "channel": "print & tv",
+    "objective": "awareness",
+    "tag": "Print & TV · 2024",
+    "title": "Trust in Every Dose",
+    "desc": "An authenticity awareness campaign focusing on raw medicine storage standards, cold-chain preservation, and genuine medicines.",
+    "meta": [
+      "Healthcare",
+      "Print & TV",
+      "Brand Awareness"
+    ],
+    "year": "2024",
+    "duration": "1 Year",
+    "subtitle": "How Apollo Pharmacy built the largest network of trusted healthcare retail, establishing quality standards for pharmaceutical storage and genuine sourcing.",
+    "metrics": [
+      {
+        "label": "Retail Stores",
+        "value": "6,000+",
+        "note": "Across India"
+      },
+      {
+        "label": "Genuine Guarantee",
+        "value": "100%",
+        "note": "Verified supply chain"
+      },
+      {
+        "label": "Customer Reach",
+        "value": "30M+",
+        "note": "Monthly visitors"
+      }
+    ],
+    "overview": "Apollo Pharmacy launched the 'Trust in Every Dose' campaign to educate consumers on the importance of buying from verified retail chains. Highlighting their direct sourcing from manufacturers, temperature-controlled storage facilities, and certified pharmacists, the campaign positioned Apollo as the ultimate guardian of consumer health, driving unprecedented loyalty in a highly fragmented pharmacy market.",
+    "objectiveContent": {
+      "goals": "To differentiate Apollo Pharmacy from local mom-and-pop pharmacies by establishing their quality control, storage standards, and authenticity guarantees.",
+      "audience": "Chronic care patients, families, safety-conscious consumers, and senior citizens across Indian urban and semi-urban markets.",
+      "problem": "The Indian pharmaceutical retail market is highly fragmented with unorganized stores that often lack temperature-controlled storage for critical drugs (like insulin) or robust authenticity checks. Apollo needed to make storage and sourcing key purchasing criteria."
+    },
+    "strategy": {
+      "approach": "Position the pharmacy not as a mere shop, but as a critical extension of medical treatment where temperature control and authenticity save lives.",
+      "messaging": "Emphasizing the core promise: 'Authentic Medicines, Stored Right, Served with Care.'",
+      "concept": "Visualizing the journey of a medicine from manufacturing plants to the patient's hand under strict quality standards.",
+      "psychology": "Appeals to 'Safety Needs' and 'Trust Validation'. By educating consumers on the hidden risks of improperly stored medicines, it establishes Apollo as a protective shield, elevating pharmacy choice from a low-involvement transaction to a high-involvement health decision."
+    },
+    "execution": {
+      "details": "A nationwide campaign executed across television channels, major regional newspapers, and in-store educational posters.",
+      "phases": [
+        "Consumer Education: Highlight the impact of temperature on medicine efficacy.",
+        "Infrastructure Showcase: Present Apollo's cold-chain logistics and smart inventory systems.",
+        "In-store Engagement: Certified pharmacists offering free blood pressure checks and dosage advice."
+      ],
+      "budget": "Robust allocation across national television channels and leading regional daily newspapers."
+    },
+    "media": {
+      "channels": [
+        {
+          "name": "Television",
+          "role": "Emotional narrative-driven TVCs highlighting family care and authentic medicines.",
+          "share": "60%"
+        },
+        {
+          "name": "Print Media",
+          "role": "Detailed full-page infographics in regional daily newspapers explaining storage standards.",
+          "share": "25%"
+        },
+        {
+          "name": "Digital Social",
+          "role": "Video content showing inside tours of cold chain facilities and pharmacist tips.",
+          "share": "15%"
+        }
+      ],
+      "assets": "Narrative video spots, informational newspaper ad layouts, in-store banners, and digital flyers.",
+      "distribution": "All leading television networks in India, regional language newspapers, and inside all 6,000+ stores."
+    },
+    "results": {
+      "metrics": [
+        {
+          "label": "Retail Stores",
+          "value": "6,000+",
+          "note": "Across India"
+        },
+        {
+          "label": "Genuine Guarantee",
+          "value": "100%",
+          "note": "Verified supply chain"
+        },
+        {
+          "label": "Customer Reach",
+          "value": "30M+",
+          "note": "Monthly visitors"
+        }
+      ],
+      "reach": "Over 150 Million views across regional television channels and millions of physical views in major metro newspapers.",
+      "sales": "Apollo Pharmacy registered a 22% increase in chronic medicine customer retention, with home delivery orders growing by 35% during the campaign period.",
+      "roi": "Excellent. The increase in repeat customer lifetime value for chronic diseases offset the campaign's media spend within 6 months."
+    },
+    "takeaways": {
+      "learnings": [
+        "Educating the consumer on quality metrics they didn't know existed creates a powerful monopoly of trust.",
+        "Positioning standard services (like temperature control) as exclusive safeguards is highly effective when competitors do not communicate them.",
+        "Certified professionals (pharmacists) act as powerful local brand validators."
+      ],
+      "practices": [
+        "Lead with authority and transparency on quality metrics.",
+        "Utilize high-trust communication channels like print and TV to target key family decision-makers."
+      ],
+      "recommendations": "For retail brands in essential sectors: build your brand story around the integrity of your backend operations. Sourcing, storage, and handling standards can be turned into your most compelling brand assets."
+    },
+    "references": [
+      "Apollo Pharmacy Annual Report 2024.",
+      "Indian Retail Forum: 'How Organised Pharmacy Chains are Reshaping Trust.'",
+      "Case Study on Indian Pharma Retail: Sourcing and Logistics Integrity."
+    ],
+    "related": [
+      "apollo-digital"
+    ]
+  },
+  "apollo-digital": {
+    "id": "apollo-digital",
+    "brand": "Apollo Pharmacy",
+    "industry": "Healthcare",
+    "channel": "digital",
+    "objective": "sales",
+    "tag": "Digital · 2020",
+    "title": "24/7 Digital Health Hub",
+    "desc": "The digital transition campaign that launched Apollo Pharmacy's instant home delivery app and virtual pharmacist program during the pandemic.",
+    "meta": [
+      "Healthcare",
+      "Digital",
+      "Sales Promotion"
+    ],
+    "year": "2020",
+    "duration": "2 Years",
+    "subtitle": "How India's largest pharmacy retail chain shifted to an omni-channel digital delivery powerhouse when the nation needed accessibility the most.",
+    "metrics": [
+      {
+        "label": "App Downloads",
+        "value": "10M+",
+        "note": "First year"
+      },
+      {
+        "label": "Delivery Speed",
+        "value": "< 2 Hours",
+        "note": "In major cities"
+      },
+      {
+        "label": "Active Users",
+        "value": "5M+",
+        "note": "Monthly active"
+      }
+    ],
+    "overview": "At the onset of the pandemic in 2020, Apollo Pharmacy accelerated its digital transformation. By launching the '24/7 Digital Health Hub' campaign, the brand introduced 2-hour doorstep medicine delivery and virtual pharmacist consultations. Through high-frequency digital ads, social media tutorials, and search engine optimization, the campaign drove millions of downloads of the Apollo 247 app, converting classic walk-in retail clients into digital-first consumers.",
+    "objectiveContent": {
+      "goals": "To drive rapid adoption and downloads of the new Apollo 247 mobile app, establishing Apollo as a safe, 24/7 instant medicine delivery partner during lockdown periods.",
+      "audience": "Tech-savvy family caretakers, individuals in quarantine, and customers seeking contactless healthcare delivery.",
+      "problem": "Pandemic lock-downs disrupted physical retail access. Traditional pharmacy customers, especially senior citizens, struggled to get regular prescriptions safely. Competitors were aggressively marketing online pharmacy models."
+    },
+    "strategy": {
+      "approach": "Highlight physical store networks as micro-fulfillment centers, enabling unmatched speed (under 2 hours) compared to pure online players that took days.",
+      "messaging": "Focusing on speed and safety: 'Your Apollo Store, Now in Your Phone. Open 24/7.'",
+      "concept": "Real-life customer scenarios showing the relief of getting authentic medicines delivered within hours of an online consult.",
+      "psychology": "Appeals to 'Urgency' and 'Convenience'. The messaging addresses immediate pain points of health uncertainty and lockdown restrictions, providing instant solutions that build customer lock-in."
+    },
+    "execution": {
+      "details": "A digital-first campaign utilizing search ads (Google Ads), social media campaigns (Facebook, Instagram), app store optimization, and SMS-based alerts to existing offline loyalty members.",
+      "phases": [
+        "App Launch & Loyalty Migration: Send direct download links to 20M+ offline loyalty cardholders.",
+        "Performance Marketing: Target search queries related to medicine delivery and online doctor consults.",
+        "Influencer & Explainer Content: Step-by-step video tutorials on app usage and pharmacist consulting."
+      ],
+      "budget": "Heavily weighted towards digital performance marketing, social media, and search advertising."
+    },
+    "media": {
+      "channels": [
+        {
+          "name": "Digital Social",
+          "role": "Social media video ads showing app interface and tutorial videos.",
+          "share": "55%"
+        },
+        {
+          "name": "Search & App Store",
+          "role": "Search engine optimization and Google Search/Play Store ads.",
+          "share": "35%"
+        },
+        {
+          "name": "SMS/Direct Mail",
+          "role": "Reaching out to existing offline customers with coupon codes.",
+          "share": "10%"
+        }
+      ],
+      "assets": "Digital banner graphics, user flow animations, promotional video clips, and influencer walkthroughs.",
+      "distribution": "YouTube, Facebook, Instagram, Google Search Network, and in-app banners."
+    },
+    "results": {
+      "metrics": [
+        {
+          "label": "App Downloads",
+          "value": "10M+",
+          "note": "First year"
+        },
+        {
+          "label": "Delivery Speed",
+          "value": "< 2 Hours",
+          "note": "In major cities"
+        },
+        {
+          "label": "Active Users",
+          "value": "5M+",
+          "note": "Monthly active"
+        }
+      ],
+      "reach": "Reached over 50 Million digital users with targeted social and search ads, resulting in a low customer acquisition cost (CAC).",
+      "sales": "Digital sales grew by 450% year-on-year, contributing to 18% of the cooperative's total revenue by the end of 2021.",
+      "roi": "Very high, establishing a lifetime digital customer base that continues to purchase online post-pandemic."
+    },
+    "takeaways": {
+      "learnings": [
+        "Micro-fulfillment using existing brick-and-mortar stores beats central warehousing on delivery speed and local inventory availability.",
+        "Migrating existing offline loyalty databases to digital is the fastest way to kickstart app adoption.",
+        "Virtual pharmacist consultation reduces purchase friction for prescription drugs."
+      ],
+      "practices": [
+        "Focus digital spend on performance marketing and app installs when launching digital services.",
+        "Deliver on the speed promise to secure high-frequency repeat purchases."
+      ],
+      "recommendations": "For offline giants entering digital: leverage your existing physical real estate as localized fulfillment centers. You can deliver faster and cheaper than online-only startups."
+    },
+    "references": [
+      "Apollo 247 App Launch Performance Report.",
+      "Omni-channel retail strategy case study: Apollo Group.",
+      "Digital Pharmacy Trends in Emerging Markets, 2020-2022."
+    ],
+    "related": [
+      "apollo-trust"
+    ]
   }
 };
 
@@ -4476,5 +4714,30 @@ export const BRANDS: Record<string, Brand> = {
       }
     ],
     "evolution": "Red Bull shifted from conventional beverage marketing to building an in-house media empire. They proved that sponsoring extreme sports and human record stunts generates far greater brand equity than traditional commercial advertising."
+  },
+  "apollopharmacy": {
+    "id": "apollopharmacy",
+    "name": "Apollo Pharmacy",
+    "industry": "Healthcare",
+    "mark": "A",
+    "founded": "1987",
+    "description": "India's largest retail pharmacy chain, offering a wide range of prescription medicines, over-the-counter drugs, and wellness products with a focus on trust, accessibility, and 24/7 service.",
+    "campaigns": [
+      {
+        "year": "2020",
+        "title": "24/7 Digital Health Hub",
+        "desc": "Apollo Pharmacy expands its physical retail footprint with digital medicine delivery and virtual pharmacist consulting.",
+        "channel": "Digital",
+        "id": "apollo-digital"
+      },
+      {
+        "year": "2024",
+        "title": "Trust in Every Dose",
+        "desc": "An awareness campaign focusing on the authenticity and storage quality of medicines across India's urban and rural sectors.",
+        "channel": "Print & TV",
+        "id": "apollo-trust"
+      }
+    ],
+    "evolution": "Apollo Pharmacy transitioned from localized brick-and-mortar stores to an integrated omni-channel healthcare platform, delivering medical authenticity and round-the-clock availability across India."
   }
 };

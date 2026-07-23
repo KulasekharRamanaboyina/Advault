@@ -107,17 +107,83 @@ export const CampaignDetailView: React.FC<CampaignDetailViewProps> = ({
     }
   };
 
-  const tocItems = [
-    { id: 'overview', num: '01', label: 'Overview' },
-    { id: 'objective', num: '02', label: 'Objective' },
-    { id: 'strategy', num: '03', label: 'Strategy' },
-    { id: 'psychology', num: '04', label: 'Psychology' },
-    { id: 'execution', num: '05', label: 'Process & Cost' },
-    { id: 'media-mix', num: '06', label: 'Media Mix' },
-    { id: 'results', num: '07', label: 'Vetted Results' },
-    { id: 'playbook', num: '08', label: 'Playbook' },
-    { id: 'references', num: '09', label: 'References' }
-  ];
+  // Dynamically compute active TOC items and section numbers based on campaign data presence
+  const activeSectionsList = [];
+  
+  // 1. Overview
+  if ((campaign as any).campaignSummaryRaw || campaign.overview) {
+    activeSectionsList.push({ id: 'overview', label: 'Overview' });
+  }
+
+  // 2. Objective
+  const hasGoals = !!((campaign as any).campaignPurposeRaw || campaign.objectiveContent?.goals);
+  const hasProblem = !!((campaign as any).businessProblemRaw || campaign.objectiveContent?.problem);
+  const hasAudience = !!((campaign as any).targetAudienceRaw || campaign.objectiveContent?.audience);
+  if (hasGoals || hasProblem || hasAudience) {
+    activeSectionsList.push({ id: 'objective', label: 'Objective' });
+  }
+
+  // 3. Strategy
+  const hasApproach = !!((campaign as any).marketingStrategyRaw || campaign.strategy?.approach);
+  const hasConcept = !!((campaign as any).positioningRaw || campaign.strategy?.concept);
+  const hasSlogan = !!campaign.strategy?.messaging;
+  if (hasApproach || hasConcept || hasSlogan) {
+    activeSectionsList.push({ id: 'strategy', label: 'Strategy' });
+  }
+
+  // 4. Psychology
+  if (campaign.strategy?.psychology) {
+    activeSectionsList.push({ id: 'psychology', label: 'Psychology' });
+  }
+
+  // 5. Execution
+  const hasExecutionDetails = !!((campaign as any).executionProcessRaw || campaign.execution?.details);
+  const hasPhases = !!(campaign.execution?.phases && campaign.execution.phases.length > 0);
+  const hasBudget = !!campaign.execution?.budget;
+  if (hasExecutionDetails || hasPhases || hasBudget) {
+    activeSectionsList.push({ id: 'execution', label: 'Process & Cost' });
+  }
+
+  // 6. Media Mix
+  const hasChannels = !!(campaign.media?.channels && campaign.media.channels.length > 0);
+  const hasAssets = !!((campaign as any).creativeApproachRaw || campaign.media?.assets);
+  const hasDistribution = !!((campaign as any).geographicCoverageRaw || campaign.media?.distribution);
+  if (hasChannels || hasAssets || hasDistribution) {
+    activeSectionsList.push({ id: 'media-mix', label: 'Media Mix' });
+  }
+
+  // 7. Results
+  const hasResultsMetrics = !!(campaign.results?.metrics && campaign.results.metrics.length > 0);
+  const hasReach = !!((campaign as any).businessResultsRaw || campaign.results?.reach);
+  const hasSales = !!((campaign as any).successHighlightsRaw || campaign.results?.sales);
+  const hasRoi = !!campaign.results?.roi;
+  if (hasResultsMetrics || hasReach || hasSales || hasRoi) {
+    activeSectionsList.push({ id: 'results', label: 'Vetted Results' });
+  }
+
+  // 8. Playbook
+  const hasLearnings = !!(campaign.takeaways?.learnings && campaign.takeaways.learnings.length > 0);
+  const hasPractices = !!(campaign.takeaways?.practices && campaign.takeaways.practices.length > 0);
+  const hasRecommendations = !!((campaign as any).keyLearningsRaw || campaign.takeaways?.recommendations);
+  if (hasLearnings || hasPractices || hasRecommendations) {
+    activeSectionsList.push({ id: 'playbook', label: 'Playbook' });
+  }
+
+  // 9. References
+  if (campaign.references && campaign.references.length > 0) {
+    activeSectionsList.push({ id: 'references', label: 'References' });
+  }
+
+  const tocItems = activeSectionsList.map((item, index) => ({
+    id: item.id,
+    num: String(index + 1).padStart(2, '0'),
+    label: item.label
+  }));
+
+  const sectionNumbers: Record<string, string> = {};
+  tocItems.forEach(item => {
+    sectionNumbers[item.id] = item.num;
+  });
 
   return (
     <section className="view view--active" data-view="campaign" id="view-campaign">
@@ -125,7 +191,7 @@ export const CampaignDetailView: React.FC<CampaignDetailViewProps> = ({
         
         {/* Back Link */}
         <div style={{ paddingTop: 'var(--space-6)', paddingBottom: 'var(--space-4)' }}>
-          <a href="#discover" className="btn btn--sm btn--ghost" style={{ paddingLeft: 0, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+          <a href="/discover" className="btn btn--sm btn--ghost" style={{ paddingLeft: 0, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
             <ArrowLeft size={14} />
             <span>Back to Discover</span>
           </a>
@@ -153,6 +219,7 @@ export const CampaignDetailView: React.FC<CampaignDetailViewProps> = ({
               onSaveCampaign={onSaveCampaign}
               onShareCampaign={onShareCampaign}
               savedCampaigns={savedCampaigns}
+              sectionNumbers={sectionNumbers}
             />
           </article>
         </div>

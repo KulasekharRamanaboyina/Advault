@@ -3,7 +3,6 @@ import { useAdVaultData } from '../../context/AdVaultDataContext';
 import { DiscoverHeader } from './DiscoverHeader';
 import { DiscoverFilters } from './DiscoverFilters';
 import { DiscoverCampaignGrid } from './DiscoverCampaignGrid';
-import { DiscoverBrandGrid } from './DiscoverBrandGrid';
 
 interface DiscoverViewProps {
   filters: {
@@ -52,7 +51,6 @@ export const DiscoverView: React.FC<DiscoverViewProps> = ({
           onShareCampaign={onShareCampaign}
           savedCampaigns={savedCampaigns}
         />
-        <DiscoverBrandGrid />
       </div>
     </section>
   );

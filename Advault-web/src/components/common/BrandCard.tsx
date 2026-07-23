@@ -12,7 +12,10 @@ export const BrandCard: React.FC<BrandCardProps> = ({ brand, variant = 'default'
   return (
     <div 
       className={`brand-card fade-in is-visible ${variant === 'dark' ? 'brand-card--dark' : ''}`} 
-      onClick={() => { window.location.hash = `#brand/${brand.id}`; }}
+      onClick={() => {
+        window.history.pushState({}, '', `/brand/${brand.id}`);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+      }}
     >
       <div className="brand-card__mark">
         <BrandLogo brandId={brand.id} />

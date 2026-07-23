@@ -28,7 +28,10 @@ export const CampaignCard: React.FC<CampaignCardProps> = ({
     <article 
       className={`card fade-in is-visible ${highlighted ? 'card--highlighted' : ''} ${isDark ? 'card--dark' : ''}`}
       id={`campaign-card-${campaign.id}`}
-      onClick={() => { window.location.hash = `#campaign/${campaign.id}`; }}
+      onClick={() => {
+        window.history.pushState({}, '', `/campaign/${campaign.id}`);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+      }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >

@@ -125,7 +125,8 @@ input, select, textarea {
 
 #discover-campaigns-grid,
 #home-brands-grid,
-#discover-brands-grid {
+#discover-brands-grid,
+#all-brands-grid {
   gap: var(--space-4);
 }
 
@@ -254,9 +255,11 @@ input, select, textarea {
 }
 
 .nav__logo {
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-family: 'Outfit', var(--font-sans);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text);
 }
 
 .nav__logo span {
@@ -558,6 +561,7 @@ input, select, textarea {
 
 /* ---------- Brand Card ---------- */
 .brand-card {
+  background-color: var(--bg);
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
   padding: var(--space-4);
@@ -659,44 +663,7 @@ input, select, textarea {
   color: var(--text);
 }
 
-/* ---------- Brand Cards (All Dark Style) ---------- */
-#home-brands-grid .brand-card,
-#discover-brands-grid .brand-card {
-  background-color: #111116;
-  border: 1px solid #1A1A22;
-  color: #FFFFFF;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
 
-#home-brands-grid .brand-card:hover,
-#discover-brands-grid .brand-card:hover {
-  background-color: #16161E;
-  border-color: #475569;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-#home-brands-grid .brand-card .brand-card__name,
-#discover-brands-grid .brand-card .brand-card__name {
-  color: #FFFFFF;
-}
-
-#home-brands-grid .brand-card .brand-card__industry,
-#discover-brands-grid .brand-card .brand-card__industry {
-  color: #94A3B8;
-}
-
-#home-brands-grid .brand-card .brand-card__arrow,
-#discover-brands-grid .brand-card .brand-card__arrow {
-  color: #FFFFFF;
-  opacity: 0.5;
-}
-
-#home-brands-grid .brand-card:hover .brand-card__arrow,
-#discover-brands-grid .brand-card:hover .brand-card__arrow {
-  color: #FFFFFF;
-  opacity: 1;
-}
 
 /* ---------- Badges ---------- */
 .badge {
@@ -1341,9 +1308,16 @@ input, select, textarea {
 }
 
 .footer__logo {
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-family: 'Outfit', var(--font-sans);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text);
+}
+
+.footer__logo span {
+  font-weight: 400;
+  color: var(--text-muted);
 }
 
 .footer__meta {

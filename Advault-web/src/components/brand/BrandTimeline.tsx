@@ -80,7 +80,8 @@ export const BrandTimeline: React.FC<BrandTimelineProps> = ({
                 onMouseLeave={() => { if (item.id) setHoveredCampaignId(null); }}
                 onClick={() => {
                   if (item.id) {
-                    window.location.hash = `#campaign/${item.id}`;
+                    window.history.pushState({}, '', `/campaign/${item.id}`);
+                    window.dispatchEvent(new PopStateEvent('popstate'));
                   }
                 }}
                 style={{ cursor: item.id ? 'pointer' : 'default' }}
@@ -91,7 +92,7 @@ export const BrandTimeline: React.FC<BrandTimelineProps> = ({
                 <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--space-3)', marginTop: 'var(--space-2)' }}>
                   <span className="tag" style={{ fontSize: '10px', padding: '2px 8px', cursor: 'default', pointerEvents: 'none', borderColor: 'var(--border-subtle)' }}>{item.channel}</span>
                   {item.id && (
-                    <a href={`#campaign/${item.id}`} className="btn btn--sm btn--ghost" style={{ height: '26px', padding: '0 var(--space-3)', display: 'inline-flex', alignItems: 'center', fontSize: '11px' }}>
+                    <a href={`/campaign/${item.id}`} className="btn btn--sm btn--ghost" style={{ height: '26px', padding: '0 var(--space-3)', display: 'inline-flex', alignItems: 'center', fontSize: '11px' }}>
                       Read Vetted Dossier &rarr;
                     </a>
                   )}

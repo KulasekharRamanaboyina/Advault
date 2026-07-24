@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAdVaultData } from '../../context/AdVaultDataContext';
+import { useAdbicepsData } from '../../context/AdbicepsDataContext';
 import { DiscoverHeader } from './DiscoverHeader';
 import { DiscoverFilters } from './DiscoverFilters';
 import { DiscoverCampaignGrid } from './DiscoverCampaignGrid';
@@ -27,7 +27,7 @@ export const DiscoverView: React.FC<DiscoverViewProps> = ({
   onShareCampaign,
   savedCampaigns,
 }) => {
-  const { campaigns: CAMPAIGNS } = useAdVaultData();
+  const { campaigns: CAMPAIGNS } = useAdbicepsData();
   const campaigns = Object.values(CAMPAIGNS);
   
   const filteredCampaigns = campaigns.filter(c => {

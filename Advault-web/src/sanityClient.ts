@@ -5,7 +5,7 @@ export const sanityClient = createClient({
   projectId: 'qhelfcdm',
   dataset: 'production',
   apiVersion: '2024-03-11',
-  useCdn: true,
+  useCdn: false,
 });
 
 const builder = imageUrlBuilder(sanityClient);

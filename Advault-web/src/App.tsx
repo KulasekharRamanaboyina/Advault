@@ -7,13 +7,13 @@ import { DiscoverView } from './components/discover/DiscoverView';
 import { BrandDetailView } from './components/brand/BrandDetailView';
 import { CampaignDetailView } from './components/campaign/CampaignDetailView';
 import { CompareView } from './components/compare/CompareView';
-import { GuidelinesView } from './components/legal/GuidelinesView';
+import { TermsView } from './components/legal/TermsView';
 import { PrivacyView } from './components/legal/PrivacyView';
-import { useAdVaultData } from './context/AdVaultDataContext';
-import { BrandsView } from './components/brand/BrandsView';
+import { BlogsView } from './components/blog/BlogsView';
+import { useAdbicepsData } from './context/AdbicepsDataContext';
 
 export const App: React.FC = () => {
-  const { campaigns: CAMPAIGNS, loading } = useAdVaultData();
+  const { campaigns: CAMPAIGNS, loading } = useAdbicepsData();
   // Pathname Routing State
   const [pathname, setPathname] = useState(window.location.pathname || '/');
   const [currentView, setCurrentView] = useState('home');
@@ -28,7 +28,7 @@ export const App: React.FC = () => {
 
   // Saved campaigns Set (synced with localStorage)
   const [savedCampaigns, setSavedCampaigns] = useState<Set<string>>(() => {
-    const saved = localStorage.getItem('advault_saved_campaigns');
+    const saved = localStorage.getItem('adbiceps_saved_campaigns');
     if (saved) {
       try {
         return new Set(JSON.parse(saved));
@@ -48,7 +48,7 @@ export const App: React.FC = () => {
 
   // Update localStorage when savedCampaigns changes
   useEffect(() => {
-    localStorage.setItem('advault_saved_campaigns', JSON.stringify(Array.from(savedCampaigns)));
+    localStorage.setItem('adbiceps_saved_campaigns', JSON.stringify(Array.from(savedCampaigns)));
   }, [savedCampaigns]);
 
   // Toast utility function
@@ -107,21 +107,27 @@ export const App: React.FC = () => {
       param = pathname.substring(7);
     } else if (pathname === '/discover') {
       view = 'discover';
-    } else if (pathname === '/brands') {
-      view = 'brands';
     } else if (pathname === '/compare') {
       view = 'compare';
-    } else if (pathname === '/guidelines') {
-      view = 'guidelines';
+    } else if (pathname === '/terms') {
+      view = 'terms';
     } else if (pathname === '/privacy') {
       view = 'privacy';
+    } else if (pathname.startsWith('/blogs/')) {
+      view = 'blogs';
+      param = pathname.substring(7);
+    } else if (pathname === '/blogs') {
+      view = 'blogs';
+      param = '';
     }
 
     setCurrentView(view);
     setParameter(param);
 
-    // Scroll to top on navigation so entrance animation looks clean
-    window.scrollTo({ top: 0, behavior: 'instant' as any });
+    // Scroll to top on navigation so entrance animation looks clean (except when hash anchor navigation is active)
+    if (!window.location.hash) {
+      window.scrollTo({ top: 0, behavior: 'instant' as any });
+    }
   }, [pathname]);
 
   // Save campaign helper
@@ -242,6 +248,20 @@ export const App: React.FC = () => {
     return () => window.removeEventListener('scroll', handleFadeIns);
   }, [currentView, parameter]);
 
+  // Handle hash scrolling for anchors like #documented-brands-title
+  useEffect(() => {
+    if (window.location.hash) {
+      const targetId = window.location.hash.substring(1);
+      const el = document.getElementById(targetId);
+      if (el) {
+        const timer = setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [currentView, pathname]);
+
   // Render correct view component based on routing state
   const renderView = () => {
     switch (currentView) {
@@ -264,8 +284,6 @@ export const App: React.FC = () => {
             savedCampaigns={savedCampaigns}
           />
         );
-      case 'brands':
-        return <BrandsView />;
       case 'brand':
         return (
           <BrandDetailView 
@@ -295,10 +313,12 @@ export const App: React.FC = () => {
             onShowToast={showToast}
           />
         );
-      case 'guidelines':
-        return <GuidelinesView />;
+      case 'terms':
+        return <TermsView />;
       case 'privacy':
         return <PrivacyView />;
+      case 'blogs':
+        return <BlogsView activePostSlug={parameter} />;
       default:
         return (
           <HomeView 
@@ -338,7 +358,7 @@ export const App: React.FC = () => {
           }
         `}</style>
         <span style={{ fontSize: '11px', letterSpacing: '0.08em', color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'var(--font-mono)' }}>
-          Loading AdVault Dossiers...
+          Loading Adbiceps Dossiers...
         </span>
       </div>
     );

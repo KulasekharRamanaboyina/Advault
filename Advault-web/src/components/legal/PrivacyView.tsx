@@ -28,7 +28,7 @@ export const PrivacyView: React.FC = () => {
             1. Local-First Browser Storage
           </h2>
           <p className="body-md text-muted" style={{ margin: 0 }}>
-            AdVault is built on a privacy-first, local-only architecture. Your bookmarking history, saved dossiers, and matrix comparisons are stored directly in your browser's local storage (`localStorage`). No saved dossier identifiers or comparison states are ever sent to our servers.
+            Adbiceps is built on a privacy-first, local-only architecture. Your bookmarking history, saved dossiers, and matrix comparisons are stored directly in your browser's local storage (`localStorage`). No saved dossier identifiers or comparison states are ever sent to our servers.
           </p>
         </section>
 

@@ -17,18 +17,18 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onSearchSubmit }) => {
     <header
       className="section hero-pattern"
       style={{
-        minHeight: 'calc(100vh - 72px)',
+        minHeight: 'auto',
         display: 'flex',
         alignItems: 'center',
-        borderBottom: '1px solid var(--border-subtle)',
-        paddingTop: 'var(--space-12)',
-        paddingBottom: 'var(--space-16)',
+        borderBottom: 'none',
+        paddingTop: 'var(--space-10)',
+        paddingBottom: 'var(--space-10)',
         position: 'relative'
       }}
     >
       <div className="container" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', position: 'relative', zIndex: 1 }}>
         <div className="caption text-muted fade-in is-visible" style={{ marginBottom: 'var(--space-4)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-          AdVault &bull; The Peer-Reviewed Archive of Physical Media & Consumer Strategy
+          Adbiceps &bull; The Peer-Reviewed Archive of Physical Media & Consumer Strategy
         </div>
 
         <h1 className="display-xl fade-in is-visible" id="hero-title" style={{ marginBottom: 'var(--space-5)', maxWidth: '20ch', marginLeft: 'auto', marginRight: 'auto', lineHeight: '1.1' }}>
@@ -41,7 +41,6 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onSearchSubmit }) => {
 
         <div className="fade-in is-visible" style={{ width: '100%', maxWidth: '680px', marginBottom: 'var(--space-6)', marginLeft: 'auto', marginRight: 'auto' }}>
           <form className="search-container" id="hero-search-form" autoComplete="off" onSubmit={handleSubmit}>
-            <Search className="search-icon" size={18} />
             <input
               type="text"
               className="search-input"
@@ -49,9 +48,37 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onSearchSubmit }) => {
               placeholder="Search campaigns, brands, or strategies..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              style={{ backgroundColor: 'var(--bg)', border: '1px solid var(--border)' }}
+              style={{ 
+                backgroundColor: 'var(--bg)', 
+                border: '1px solid var(--border)',
+                paddingLeft: '20px',
+                paddingRight: '48px'
+              }}
             />
-            <span className="search-shortcut" style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)' }}>⌘K</span>
+            <button
+              type="submit"
+              className="search-submit-btn"
+              style={{
+                position: 'absolute',
+                right: '16px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--text-muted)',
+                cursor: 'pointer',
+                transition: 'color var(--ease)'
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+              aria-label="Search"
+            >
+              <Search size={18} />
+            </button>
           </form>
         </div>
       </div>

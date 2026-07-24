@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { useAdVaultData } from '../../context/AdVaultDataContext';
+import { useAdbicepsData } from '../../context/AdbicepsDataContext';
 import { BrandHeader } from './BrandHeader';
 import { BrandTimeline } from './BrandTimeline';
 import { BrandRelatedDossiers } from './BrandRelatedDossiers';
@@ -18,7 +18,7 @@ export const BrandDetailView: React.FC<BrandDetailViewProps> = ({
   onShareCampaign,
   savedCampaigns,
 }) => {
-  const { brands: BRANDS, campaigns: CAMPAIGNS } = useAdVaultData();
+  const { brands: BRANDS, campaigns: CAMPAIGNS } = useAdbicepsData();
   const brand = BRANDS[brandId];
 
   const [channelFilter, setChannelFilter] = useState('all');

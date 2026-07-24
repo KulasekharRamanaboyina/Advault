@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useAdVaultData } from '../../context/AdVaultDataContext';
+import { useAdbicepsData } from '../../context/AdbicepsDataContext';
 import { CompareHeader } from './CompareHeader';
 import { CompareSelectors } from './CompareSelectors';
 import { CompareMatrix } from './CompareMatrix';
@@ -19,7 +19,7 @@ export const CompareView: React.FC<CompareViewProps> = ({
   setCampaignBId,
   onShowToast,
 }) => {
-  const { campaigns: CAMPAIGNS } = useAdVaultData();
+  const { campaigns: CAMPAIGNS } = useAdbicepsData();
   const campaigns = Object.values(CAMPAIGNS);
 
   const [compareIds, setCompareIds] = useState<string[]>([campaignAId, campaignBId]);

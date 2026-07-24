@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAdVaultData } from '../../context/AdVaultDataContext';
+import { useAdbicepsData } from '../../context/AdbicepsDataContext';
 import { getImageUrl } from '../../sanityClient';
 
 interface BrandLogoProps {
@@ -8,7 +8,7 @@ interface BrandLogoProps {
 }
 
 export const BrandLogo: React.FC<BrandLogoProps> = ({ brandId, customStyle = {} }) => {
-  const { brands: BRANDS } = useAdVaultData();
+  const { brands: BRANDS } = useAdbicepsData();
   const normalizedId = brandId.toLowerCase().replace(/[^a-z0-9]/g, '');
   const brand = BRANDS[normalizedId];
   const name = brand ? brand.name : brandId;

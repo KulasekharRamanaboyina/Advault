@@ -5,23 +5,41 @@ import { CAMPAIGNS, BRANDS } from '../Advault-web/src/data';
 // Helper to generate a random key for Portable Text blocks
 const makeKey = () => Math.random().toString(36).substring(2, 11);
 
-// Helper to convert plain text paragraphs into Portable Text block format
+// Helper to convert plain text paragraphs into Portable Text block format with heading styles
 function textToBlock(text: string) {
   if (!text) return [];
-  return text.split('\n\n').map(paragraph => ({
-    _type: 'block',
-    _key: makeKey(),
-    style: 'normal',
-    markDefs: [],
-    children: [
-      {
-        _type: 'span',
-        _key: makeKey(),
-        text: paragraph,
-        marks: []
+  return text.split('\n')
+    .map(line => line.trim())
+    .filter(Boolean)
+    .map(line => {
+      let style = 'normal';
+      let cleanText = line;
+      if (line.startsWith('### ')) {
+        style = 'h3';
+        cleanText = line.substring(4);
+      } else if (line.startsWith('## ')) {
+        style = 'h2';
+        cleanText = line.substring(3);
+      } else if (line.startsWith('# ')) {
+        style = 'h1';
+        cleanText = line.substring(2);
       }
-    ]
-  }));
+
+      return {
+        _type: 'block',
+        _key: makeKey(),
+        style: style,
+        markDefs: [],
+        children: [
+          {
+            _type: 'span',
+            _key: makeKey(),
+            text: cleanText,
+            marks: []
+          }
+        ]
+      };
+    });
 }
 
 // Generate ndjson document lists
@@ -278,6 +296,73 @@ Object.entries(CAMPAIGNS).forEach(([key, c]) => {
     tags: c.meta,
     seoTitle: c.title,
     seoDescription: c.desc
+  });
+});
+
+// 5. Generate Blog Post Documents
+const staticPosts = [
+  {
+    id: 'tactile-marketing',
+    title: 'The Underappreciated Power of Tactile Marketing',
+    date: '2026-07-24',
+    category: 'Tactile Marketing',
+    excerpt: 'Why physical marketing assets command higher cognitive focus and brand recall in a screen-saturated world.',
+    readTime: '4 min read',
+    content: `In an era dominated by click-through rates and digital impressions, the physical touch of paper is often dismissed as a legacy medium. However, neuromarketing research consistently demonstrates that physical marketing materials generate more brain activity in areas associated with integration and valuation than digital ads.
+
+Tactile experiences leave a deeper footprint in the brain, driving higher emotional response and brand recall. When a customer holds a heavily-textured catalog, a premium cardstock flyer, or a matte-finish direct mail piece, they are not just reading information—they are experiencing tactile feedback that communicates luxury, reliability, and substance.
+
+### Why Print Outperforms Digital in Memory Retention:
+1. Sensory Integration: Physical media engages multiple senses simultaneously. The smell of ink, the feel of texture, and the weight of cardstock work in tandem to build a cohesive mental map.
+2. Cognitive Ease: Digital screens invite scanning and multitasking, which increases cognitive load. Print media, on the other hand, encourages focused, linear reading.
+3. High Intent Interaction: Direct mail arrives in a physical mailbox, a space that is checked daily and demands a physical decision (either storing, opening, or discarding), unlike digital spam which can be ignored or deleted with one click.`
+  },
+  {
+    id: 'billboard-hierarchy',
+    title: 'Decoding the Visual Hierarchy of Legendary Billboards',
+    date: '2026-06-12',
+    category: 'Out of Home',
+    excerpt: 'An analysis of how minimal copywriting and strong negative space make billboards memorable at 70 mph.',
+    readTime: '3 min read',
+    content: `A great billboard is read in three seconds or less. This strict constraint makes visual hierarchy the single most critical factor in out-of-home advertising.
+
+The most legendary billboard campaigns—from Nike's early athletic showcases to Apple's 'Think Different' posters—rely on a single focus point, a bold header, and a massive amount of negative space. When you try to convey more than one message on a roadside display, you end up conveying nothing at all.
+
+### Key Rules for Effective Billboard Layouts:
+- The Rule of Seven: Never exceed seven words of copy. Passersby cannot absorb complex sentences while navigating traffic.
+- High Contrast Backgrounds: Utilize high-contrast text color combinations (e.g., black on yellow, white on black) to ensure legibility during dawn, dusk, and rainy conditions.
+- Negative Space: Leave at least 40% of the board layout completely blank. This forces the viewer's eye directly to the core message and visual element without distractions.`
+  },
+  {
+    id: 'direct-mail-economics',
+    title: 'Direct Mail Economics: Beyond the Postage Stamps',
+    date: '2026-05-28',
+    category: 'Economics',
+    excerpt: 'Understanding unit costs, response rates, and customer lifetime value calculations of targeted direct mail.',
+    readTime: '5 min read',
+    content: `While direct mail has a higher cost-per-acquisition (CPA) compared to programmatic digital ads, it frequently yields a higher Return on Investment (ROI) for premium consumer products and services.
+
+This article breaks down the unit economics of direct mail fulfillment, detailing postage optimization, geographic segmentation, and how to calculate Customer Lifetime Value (CLV) against high direct mail print costs.
+
+### Calculating the ROI of Direct Mail:
+Unlike digital campaigns where metrics are updated in real time, direct mail requires a longer attribution window. To calculate the ROI correctly:
+1. Total Acquisition Cost: Include list broker fees, creative design, printing stock, variable personalization, and postage fees.
+2. Response Attributions: Use unique promo codes, dedicated QR codes, or custom landing pages to isolate mailer-generated conversions.
+3. LTV vs CPA ratio: Since physical mailers establish stronger emotional relationships, customers acquired via direct mail typically boast a 25% higher customer lifetime value (LTV) compared to search or social ad acquisitions.`
+  }
+];
+
+staticPosts.forEach(post => {
+  documents.push({
+    _id: `post-${post.id}`,
+    _type: 'post',
+    title: post.title,
+    slug: { _type: 'slug', current: post.id },
+    date: post.date,
+    category: post.category,
+    excerpt: post.excerpt,
+    content: textToBlock(post.content),
+    readTime: post.readTime
   });
 });
 

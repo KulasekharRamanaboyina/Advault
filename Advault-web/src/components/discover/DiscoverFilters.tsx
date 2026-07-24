@@ -60,7 +60,6 @@ export const DiscoverFilters: React.FC<DiscoverFiltersProps> = ({ filters, setFi
           value={filters.search}
           onChange={handleSearchChange}
         />
-        <span className="search-shortcut">⌘K</span>
       </div>
 
       {/* Industry taxonomy filter row */}

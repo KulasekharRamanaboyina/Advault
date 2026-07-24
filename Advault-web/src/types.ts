@@ -132,3 +132,14 @@ export interface Brand {
   logo?: any;
   featuredImage?: any;
 }
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  date: string;
+  category: string;
+  excerpt: string;
+  content: any; // Raw Sanity portable text blocks
+  readTime: string;
+  thumbnail?: any; // Raw Sanity image asset reference
+}

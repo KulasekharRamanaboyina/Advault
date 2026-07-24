@@ -1,16 +1,17 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Campaign, Brand } from '../types';
+import { Campaign, Brand, BlogPost } from '../types';
 import { CAMPAIGNS as STATIC_CAMPAIGNS, BRANDS as STATIC_BRANDS } from '../data';
 import { sanityClient } from '../sanityClient';
 
-interface AdVaultDataContextType {
+interface AdbicepsDataContextType {
   campaigns: Record<string, Campaign>;
   brands: Record<string, Brand>;
+  posts: BlogPost[];
   loading: boolean;
   error: string | null;
 }
 
-const AdVaultDataContext = createContext<AdVaultDataContextType | undefined>(undefined);
+const AdbicepsDataContext = createContext<AdbicepsDataContextType | undefined>(undefined);
 
 // Helper to convert Sanity Portable Text block arrays to plain text strings
 export function blocksToText(blocks: any): string {
@@ -29,9 +30,79 @@ export function blocksToText(blocks: any): string {
     .join('\n\n');
 }
 
-export const AdVaultDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const STATIC_POSTS: BlogPost[] = [
+  {
+    id: 'tactile-marketing',
+    title: 'The Underappreciated Power of Tactile Marketing',
+    date: '2026-07-24',
+    category: 'Tactile Marketing',
+    excerpt: 'Why physical marketing assets command higher cognitive focus and brand recall in a screen-saturated world.',
+    readTime: '4 min read',
+    content: [
+      {
+        _type: 'block',
+        _key: 'b1',
+        style: 'normal',
+        children: [
+          {
+            _type: 'span',
+            _key: 's1',
+            text: 'In an era dominated by click-through rates and digital impressions, the physical touch of paper is often dismissed as a legacy medium. However, neuromarketing research consistently demonstrates that physical marketing materials generate more brain activity in areas associated with integration and valuation than digital ads.\n\nTactile experiences leave a deeper footprint in the brain, driving higher emotional response and brand recall. When a customer holds a heavily-textured catalog, a premium cardstock flyer, or a matte-finish direct mail piece, they are not just reading information—they are experiencing tactile feedback that communicates luxury, reliability, and substance.'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'billboard-hierarchy',
+    title: 'Decoding the Visual Hierarchy of Legendary Billboards',
+    date: '2026-06-12',
+    category: 'Out of Home',
+    excerpt: 'An analysis of how minimal copywriting and strong negative space make billboards memorable at 70 mph.',
+    readTime: '3 min read',
+    content: [
+      {
+        _type: 'block',
+        _key: 'b2',
+        style: 'normal',
+        children: [
+          {
+            _type: 'span',
+            _key: 's2',
+            text: "A great billboard is read in three seconds or less. This strict constraint makes visual hierarchy the single most critical factor in out-of-home advertising.\n\nThe most legendary billboard campaigns—from Nike's early athletic showcases to Apple's 'Think Different' posters—rely on a single focus point, a bold header, and a massive amount of negative space. When you try to convey more than one message on a roadside display, you end up conveying nothing at all."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'direct-mail-economics',
+    title: 'Direct Mail Economics: Beyond the Postage Stamps',
+    date: '2026-05-28',
+    category: 'Economics',
+    excerpt: 'Understanding unit costs, response rates, and customer lifetime value calculations of targeted direct mail.',
+    readTime: '5 min read',
+    content: [
+      {
+        _type: 'block',
+        _key: 'b3',
+        style: 'normal',
+        children: [
+          {
+            _type: 'span',
+            _key: 's3',
+            text: 'While direct mail has a higher cost-per-acquisition (CPA) compared to programmatic digital ads, it frequently yields a higher Return on Investment (ROI) for premium consumer products and services.\n\nThis article breaks down the unit economics of direct mail fulfillment, detailing postage optimization, geographic segmentation, and how to calculate Customer Lifetime Value (CLV) against high direct mail print costs.'
+          }
+        ]
+      }
+    ]
+  }
+];
+
+export const AdbicepsDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [campaigns, setCampaigns] = useState<Record<string, Campaign>>(STATIC_CAMPAIGNS);
   const [brands, setBrands] = useState<Record<string, Brand>>(STATIC_BRANDS);
+  const [posts, setPosts] = useState<BlogPost[]>(STATIC_POSTS);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -40,6 +111,44 @@ export const AdVaultDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
       try {
         setLoading(true);
         setError(null);
+
+        // Isolated query block for blog posts
+        try {
+          const sanityPosts = await sanityClient.fetch(`
+            *[_type == "post"] | order(date desc) {
+              _id,
+              title,
+              "slug": slug.current,
+              date,
+              category,
+              excerpt,
+              content,
+              readTime,
+              thumbnail
+            }
+          `);
+
+          if (sanityPosts && sanityPosts.length > 0) {
+            const mappedPosts: BlogPost[] = sanityPosts.map((p: any) => ({
+              id: p.slug || p._id,
+              title: p.title,
+              date: p.date,
+              category: p.category,
+              excerpt: p.excerpt,
+              content: p.content,
+              readTime: p.readTime,
+              thumbnail: p.thumbnail
+            }));
+            setPosts(mappedPosts);
+          } else {
+            setPosts(STATIC_POSTS);
+          }
+        } catch (postErr) {
+          console.error('Failed to load posts from Sanity CMS:', postErr);
+          setPosts(STATIC_POSTS);
+        }
+
+        // Fetch brands from Sanity
 
         // Fetch brands from Sanity
         const sanityBrands = await sanityClient.fetch(`
@@ -307,8 +416,8 @@ export const AdVaultDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
         setCampaigns(mappedCampaigns);
         setLoading(false);
       } catch (err: any) {
-        console.error('Failed to query Sanity Studio CMS data:', err);
-        setError('Could not connect to the CMS. Using offline fallback data.');
+        console.error('Failed to query Sanity Studio CMS brands/campaigns data:', err);
+        setError('Could not connect to the CMS for campaigns/brands. Using offline fallback.');
         setLoading(false);
       }
     }
@@ -317,16 +426,16 @@ export const AdVaultDataProvider: React.FC<{ children: React.ReactNode }> = ({ c
   }, []);
 
   return (
-    <AdVaultDataContext.Provider value={{ campaigns, brands, loading, error }}>
+    <AdbicepsDataContext.Provider value={{ campaigns, brands, posts, loading, error }}>
       {children}
-    </AdVaultDataContext.Provider>
+    </AdbicepsDataContext.Provider>
   );
 };
 
-export const useAdVaultData = (): AdVaultDataContextType => {
-  const context = useContext(AdVaultDataContext);
+export const useAdbicepsData = (): AdbicepsDataContextType => {
+  const context = useContext(AdbicepsDataContext);
   if (context === undefined) {
-    throw new Error('useAdVaultData must be used within an AdVaultDataProvider');
+    throw new Error('useAdbicepsData must be used within an AdbicepsDataProvider');
   }
   return context;
 };

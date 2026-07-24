@@ -23,10 +23,26 @@ export const ContentRenderer: React.FC<ContentRendererProps> = ({
           components={{
             block: {
               normal: ({ children }) => <p style={{ marginBottom: 'var(--space-3)' }}>{children}</p>,
-              h1: ({ children }) => <h1 style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-2)' }}>{children}</h1>,
-              h2: ({ children }) => <h2 style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-2)' }}>{children}</h2>,
-              h3: ({ children }) => <h3 style={{ marginTop: 'var(--space-3)', marginBottom: 'var(--space-2)' }}>{children}</h3>,
-              h4: ({ children }) => <h4 style={{ marginTop: 'var(--space-3)', marginBottom: 'var(--space-1)' }}>{children}</h4>,
+              h1: ({ children, value }) => {
+                const text = value.children?.map((c: any) => c.text).join('') || '';
+                const id = text.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-');
+                return <h1 id={id} style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-2)' }}>{children}</h1>;
+              },
+              h2: ({ children, value }) => {
+                const text = value.children?.map((c: any) => c.text).join('') || '';
+                const id = text.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-');
+                return <h2 id={id} style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-2)' }}>{children}</h2>;
+              },
+              h3: ({ children, value }) => {
+                const text = value.children?.map((c: any) => c.text).join('') || '';
+                const id = text.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-');
+                return <h3 id={id} style={{ marginTop: 'var(--space-3)', marginBottom: 'var(--space-2)' }}>{children}</h3>;
+              },
+              h4: ({ children, value }) => {
+                const text = value.children?.map((c: any) => c.text).join('') || '';
+                const id = text.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-');
+                return <h4 id={id} style={{ marginTop: 'var(--space-3)', marginBottom: 'var(--space-1)' }}>{children}</h4>;
+              },
               blockquote: ({ children }) => (
                 <blockquote style={{ 
                   borderLeft: '4px solid var(--border-subtle)', 

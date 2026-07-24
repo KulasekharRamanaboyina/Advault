@@ -1,6 +1,6 @@
 import React from 'react';
 import { Campaign } from '../../types';
-import { useAdVaultData } from '../../context/AdVaultDataContext';
+import { useAdbicepsData } from '../../context/AdbicepsDataContext';
 import { CampaignCard } from '../common/CampaignCard';
 import { ContentRenderer } from '../common/ContentRenderer';
 
@@ -19,7 +19,7 @@ export const CampaignEditorialSections: React.FC<CampaignEditorialSectionsProps>
   savedCampaigns,
   sectionNumbers,
 }) => {
-  const { campaigns: CAMPAIGNS } = useAdVaultData();
+  const { campaigns: CAMPAIGNS } = useAdbicepsData();
 
   // Helper validation flags to ensure empty fields are not rendered
   const hasBackground = !!((campaign as any).campaignBackgroundRaw || campaign.subtitle);
@@ -201,7 +201,7 @@ export const CampaignEditorialSections: React.FC<CampaignEditorialSectionsProps>
           
           <div className="quote-block">
             <p className="quote-block__text">"Great advertising is disarming. It speaks directly to human aspiration, bypassing structural buying patterns by forging an authentic emotional contract."</p>
-            <span className="quote-block__author">AdVault Editorial Board</span>
+            <span className="quote-block__author">Adbiceps Editorial Board</span>
           </div>
         </section>
       )}

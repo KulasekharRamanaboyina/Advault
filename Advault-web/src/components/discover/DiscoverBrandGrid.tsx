@@ -1,9 +1,9 @@
 import React from 'react';
-import { useAdVaultData } from '../../context/AdVaultDataContext';
+import { useAdbicepsData } from '../../context/AdbicepsDataContext';
 import { BrandCard } from '../common/BrandCard';
 
 export const DiscoverBrandGrid: React.FC = () => {
-  const { brands: BRANDS } = useAdVaultData();
+  const { brands: BRANDS } = useAdbicepsData();
   return (
     <section style={{ paddingTop: 'var(--space-8)', borderTop: '1px solid var(--border-subtle)' }}>
       <div style={{ marginBottom: 'var(--space-5)' }}>

@@ -5,7 +5,7 @@ export const Navbar: React.FC = () => {
     <header className="nav" id="main-nav">
       <div className="container nav__inner" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
         <a href="/" className="nav__logo">
-          A<span>dVault</span>
+          Ad<span>biceps</span>
         </a>
       </div>
     </header>

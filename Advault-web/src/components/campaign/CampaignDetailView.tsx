@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { useAdVaultData } from '../../context/AdVaultDataContext';
+import { useAdbicepsData } from '../../context/AdbicepsDataContext';
 import { CampaignHeader } from './CampaignHeader';
 import { CampaignToc } from './CampaignToc';
 import { CampaignEditorialSections } from './CampaignEditorialSections';
@@ -20,7 +20,7 @@ export const CampaignDetailView: React.FC<CampaignDetailViewProps> = ({
   onDownloadCampaign,
   savedCampaigns,
 }) => {
-  const { campaigns: CAMPAIGNS } = useAdVaultData();
+  const { campaigns: CAMPAIGNS } = useAdbicepsData();
   const campaign = CAMPAIGNS[campaignId];
   const [activeSection, setActiveSection] = useState('overview');
 

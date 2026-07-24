@@ -1541,54 +1541,8 @@ input, select, textarea {
 
 /* Medium Mobile (600px and down) */
 @media (max-width: 600px) {
-  /* Premium horizontal scrollable TOC bar for mobile case-study reading */
   .article-toc {
-    position: sticky;
-    top: var(--nav-height);
-    z-index: 10;
-    border-left: none;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-    border-radius: 0;
-    margin-left: calc(-1 * var(--space-6));
-    margin-right: calc(-1 * var(--space-6));
-    padding: var(--space-3) var(--space-6);
-    background-color: var(--bg);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  }
-  
-  .article-toc__title {
-    display: none;
-  }
-  
-  .article-toc__list {
-    display: flex !important;
-    flex-direction: row !important;
-    overflow-x: auto;
-    white-space: nowrap;
-    gap: var(--space-4);
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  
-  .article-toc__list::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .article-toc__link {
-    padding: 4px 0 8px 0 !important;
-    border-left: none !important;
-    border-bottom: 2px solid transparent !important;
-    font-size: 13px;
-    display: inline-block;
-    flex-shrink: 0;
-  }
-  
-  .article-toc__link--active {
-    border-bottom-color: var(--border) !important;
-    font-weight: 600;
-    padding-left: 0 !important;
+    display: none !important;
   }
   
   .nav__menu {
@@ -1870,12 +1824,6 @@ input, select, textarea {
   .article-header__logo-wrapper {
     width: 60px;
     height: 60px;
-  }
-  
-  /* Add containment to sticky mobile TOC to prevent horizontal overflow */
-  .article-toc {
-    max-width: 100vw;
-    overflow: hidden;
   }
 }
 

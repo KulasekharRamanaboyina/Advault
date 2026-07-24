@@ -81,7 +81,7 @@ export const BrandDetailView: React.FC<BrandDetailViewProps> = ({
         {/* Brand Header */}
         <BrandHeader brand={brand} />
 
-        <div className="grid grid--3" style={{ gap: 'var(--space-6)', alignItems: 'flex-start', marginBottom: 'var(--space-12)' }}>
+        <div className="brand-layout-grid">
           <BrandTimeline 
             filteredTimeline={filteredTimeline}
             uniqueChannels={uniqueChannels}

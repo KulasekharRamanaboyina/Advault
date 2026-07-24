@@ -22,7 +22,7 @@ export const BrandTimeline: React.FC<BrandTimelineProps> = ({
   timelineItemRefs,
 }) => {
   return (
-    <div className="grid__span-2">
+    <div className="brand-timeline-container">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-4)', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
         <h2 className="title-md" style={{ marginBottom: 0 }}>Historical Footprint Timeline</h2>
       </div>
@@ -30,17 +30,15 @@ export const BrandTimeline: React.FC<BrandTimelineProps> = ({
       {/* Dynamic Channel Filter Pills Row */}
       <div 
         id="timeline-channel-filters" 
-        className="tags" 
-        style={{ marginBottom: 'var(--space-5)', paddingBottom: 'var(--space-3)', borderBottom: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center' }}
+        className="brand-timeline-filters"
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-muted)', marginRight: 'var(--space-2)' }}>
+        <div className="brand-timeline-filters__label">
           <Filter size={12} />
-          <span style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Filter:</span>
+          <span>Filter:</span>
         </div>
         <button 
           className={`tag ${channelFilter === 'all' ? 'tag--active' : ''}`} 
           onClick={() => setChannelFilter('all')}
-          style={{ padding: '4px 10px', fontSize: '11px', height: '26px', lineHeight: 1 }}
         >
           All Channels
         </button>
@@ -49,7 +47,6 @@ export const BrandTimeline: React.FC<BrandTimelineProps> = ({
             key={ch}
             className={`tag ${channelFilter.toLowerCase() === ch.toLowerCase() ? 'tag--active' : ''}`}
             onClick={() => setChannelFilter(ch.toLowerCase())}
-            style={{ padding: '4px 10px', fontSize: '11px', height: '26px', lineHeight: 1 }}
           >
             {ch}
           </button>

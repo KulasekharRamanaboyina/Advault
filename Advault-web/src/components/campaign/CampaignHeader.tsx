@@ -22,11 +22,11 @@ export const CampaignHeader: React.FC<CampaignHeaderProps> = ({
 }) => {
   return (
     <header className="article-header">
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-5)', marginBottom: 'var(--space-3)', flexWrap: 'wrap' }}>
-        <div style={{ width: '72px', height: '72px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+      <div className="article-header__container">
+        <div className="article-header__logo-wrapper">
           <BrandLogo brandId={campaign.brand} customStyle={{ maxWidth: '100%', maxHeight: '100%' }} />
         </div>
-        <div style={{ flex: 1, minWidth: '250px' }}>
+        <div className="article-header__info">
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-2)', flexWrap: 'wrap' }}>
             <span className="article-header__kicker" style={{ marginBottom: 0 }}>Case Study Dossier</span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontFamily: 'var(--font-mono)', fontSize: '11px', textTransform: 'uppercase', fontWeight: 500, color: 'var(--text-muted)', background: 'var(--surface-subtle)', border: '1px solid var(--border-subtle)', padding: '2px 8px', borderRadius: '12px', lineHeight: 1 }}>

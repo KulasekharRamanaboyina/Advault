@@ -110,7 +110,7 @@ export const BrandRelatedDossiers: React.FC<BrandRelatedDossiersProps> = ({ bran
   const evolution = details ? details.evolutionDetails : brand.evolution;
 
   return (
-    <div className="brand-detail-sidebar" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+    <div className="brand-detail-sidebar">
       {/* Brand History & Genesis Section (Unboxed) */}
       <div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: 'var(--space-3)', borderBottom: '1px solid var(--border-subtle)', paddingBottom: 'var(--space-2)' }}>

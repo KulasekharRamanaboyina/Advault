@@ -425,40 +425,38 @@ export const CampaignEditorialSections: React.FC<CampaignEditorialSectionsProps>
 
                 return (
                   <li style={{ marginBottom: 'var(--space-3)' }} key={index}>
-                    <div style={{ display: 'inline-block' }}>
-                      <span style={{ color: 'var(--text)' }}>{citationText}</span>
-                      {ref.fileUrl && (
-                        <a 
-                          href={ref.fileUrl} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          style={{ 
-                            marginLeft: 'var(--space-2)', 
-                            color: 'var(--text-link)', 
-                            textDecoration: 'underline',
-                            fontSize: '12px',
-                            fontWeight: 600
-                          }}
-                        >
-                          [View Full Document]
-                        </a>
-                      )}
-                      {ref.url && (
-                        <a 
-                          href={ref.url} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          style={{ 
-                            marginLeft: 'var(--space-2)', 
-                            color: 'var(--text-link)', 
-                            textDecoration: 'underline',
-                            fontSize: '12px'
-                          }}
-                        >
-                          [Access Link]
-                        </a>
-                      )}
-                    </div>
+                    <span style={{ color: 'var(--text)' }}>{citationText}</span>
+                    {ref.fileUrl && (
+                      <a 
+                        href={ref.fileUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        style={{ 
+                          marginLeft: 'var(--space-2)', 
+                          color: 'var(--text-link)', 
+                          textDecoration: 'underline',
+                          fontSize: '12px',
+                          fontWeight: 600
+                        }}
+                      >
+                        [View Full Document]
+                      </a>
+                    )}
+                    {ref.url && (
+                      <a 
+                        href={ref.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        style={{ 
+                          marginLeft: 'var(--space-2)', 
+                          color: 'var(--text-link)', 
+                          textDecoration: 'underline',
+                          fontSize: '12px'
+                        }}
+                      >
+                        [Access Link]
+                      </a>
+                    )}
                     {ref.notes && Array.isArray(ref.notes) && ref.notes.length > 0 && (
                       <details style={{ marginTop: 'var(--space-2)', fontSize: '13px' }}>
                         <summary style={{ cursor: 'pointer', outline: 'none', color: 'var(--text-link)', fontWeight: 500 }}>
@@ -490,7 +488,7 @@ export const CampaignEditorialSections: React.FC<CampaignEditorialSectionsProps>
       {relatedCampaigns.length > 0 && (
         <section className="article-section" style={{ borderTop: '1px solid var(--border)', paddingTop: 'var(--space-6)' }}>
           <span className="caption text-muted" style={{ marginBottom: 'var(--space-4)', display: 'block' }}>Related Research Files</span>
-          <div className="grid grid--2">
+          <div className="campaign-related-grid">
             {relatedCampaigns.map(relCampaign => (
               <CampaignCard 
                 key={relCampaign.id} 
